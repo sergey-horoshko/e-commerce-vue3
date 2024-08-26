@@ -1,44 +1,30 @@
 <template>
-  <header class="flex items-center justify-center bg-[#252525] py-2 px-4">
-    <div class="flex items-center justify-between w-full container">
+  <header class="flex items-center justify-center bg-[#252525] px-4 py-2">
+    <div class="container flex w-full items-center justify-between">
       <router-link to="/">
-        <img
-          alt="Лого"
-          class="max-w-16 w-full"
-          src="@/assets/header-logo.svg"
-        >
+        <img alt="Лого" class="w-full max-w-16" src="@/assets/header-logo.svg" />
       </router-link>
 
       <div class="flex items-center gap-3">
-        <router-link
-          class="relative"
-          to="/favorites">
+        <router-link class="relative" to="/favorites">
           <span
             v-if="favoritesCounter"
-            class="flex justify-center absolute -bottom-2 duration-300 items-center bg-white w-5 h-5 text-[11px] rounded-full text-[#252525]"
+            class="absolute -bottom-2 flex h-5 w-5 items-center justify-center rounded-full bg-white text-[11px] text-[#252525] duration-300"
           >
             {{ favoritesCounter }}
           </span>
-          <vue-feather
-            class="cursor-pointer "
-            type="heart"
-          />
+          <vue-feather class="cursor-pointer" type="heart" />
         </router-link>
 
-        <router-link
-          class="relative"
-          to="/cart">
+        <router-link class="relative" to="/cart">
           <span
             v-if="cartCounter"
-            class="flex justify-center absolute -bottom-2 duration-300 items-center bg-white w-5 h-5 text-[11px] rounded-full text-[#252525]"
+            class="absolute -bottom-2 flex h-5 w-5 items-center justify-center rounded-full bg-white text-[11px] text-[#252525] duration-300"
           >
             {{ cartCounter }}
           </span>
 
-          <vue-feather
-            class="cursor-pointer "
-            type="shopping-cart"
-          />
+          <vue-feather class="cursor-pointer" type="shopping-cart" />
         </router-link>
       </div>
     </div>
@@ -46,29 +32,29 @@
 </template>
 
 <script>
-import { computed } from 'vue'
-import { useFavorites } from '@/stores/favoritesProducts.js'
-import { useCart } from '@/stores/cartProducts.js'
+import { computed } from 'vue';
+import { useFavorites } from '@/stores/favoritesProducts.js';
+import { useCart } from '@/stores/cartProducts.js';
 
 export default {
   setup() {
     // data
-    const favoritesStore = useFavorites()
-    const cartStore = useCart()
+    const favoritesStore = useFavorites();
+    const cartStore = useCart();
 
     // computed
     const favoritesCounter = computed(() => {
-      return favoritesStore.counter
-    })
+      return favoritesStore.counter;
+    });
 
     const cartCounter = computed(() => {
-      return cartStore.counter
-    })
+      return cartStore.counter;
+    });
 
     return {
       favoritesCounter,
       cartCounter
-    }
+    };
   }
-}
+};
 </script>

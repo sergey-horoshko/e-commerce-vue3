@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { acceptHMRUpdate, defineStore } from 'pinia'
+import { acceptHMRUpdate, defineStore } from 'pinia';
 import { getProduct } from '@/api/products.js';
 
 export const useProduct = defineStore('product', () => {
@@ -12,15 +12,15 @@ export const useProduct = defineStore('product', () => {
     try {
       product.value = await getProduct(id);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     } finally {
       pending.value = false;
     }
   };
 
-  return { pending, product, getData }
-})
+  return { pending, product, getData };
+});
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useProduct, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useProduct, import.meta.hot));
 }

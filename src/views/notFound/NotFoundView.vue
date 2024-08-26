@@ -1,19 +1,13 @@
 <template>
-  <h1 class="mr-auto text-[36px] font-bold mb-3">
-    Упс, такой страницы нет
-  </h1>
+  <h1 class="mb-3 mr-auto text-[36px] font-bold">Упс, такой страницы нет</h1>
 </template>
 
 <script>
 export default {
   setup() {
-
-
-    return {}
+    return {};
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

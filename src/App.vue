@@ -1,27 +1,27 @@
 <template>
   <TheHeader />
-  <main class="flex justify-center items-start h-full min-h-full grow container py-2 px-4 my-5 mx-auto">
+  <main class="container mx-auto my-5 flex h-full min-h-full grow items-start justify-center px-4 py-2">
     <RouterView />
   </main>
   <TheFooter />
 </template>
 
 <script>
-import { onMounted } from 'vue'
-import TheHeader from '@/components/TheHeader.vue'
-import TheFooter from '@/components/TheFooter.vue'
-import { useFavorites } from '@/stores/favoritesProducts.js'
-import { useCart } from '@/stores/cartProducts.js'
+import { onMounted } from 'vue';
+import TheHeader from '@/components/TheHeader.vue';
+import TheFooter from '@/components/TheFooter.vue';
+import { useFavorites } from '@/stores/favoritesProducts.js';
+import { useCart } from '@/stores/cartProducts.js';
 
 export default {
   setup() {
     // data
-    const favoritesStore = useFavorites()
-    const cartStore = useCart()
+    const favoritesStore = useFavorites();
+    const cartStore = useCart();
 
     // methods
-    const { getData } = favoritesStore
-    const { getDataCart } = cartStore
+    const { getData } = favoritesStore;
+    const { getDataCart } = cartStore;
 
     // hooks
     onMounted(() => {
@@ -30,6 +30,6 @@ export default {
     });
   },
 
-  components: { TheFooter, TheHeader },
-}
+  components: { TheFooter, TheHeader }
+};
 </script>

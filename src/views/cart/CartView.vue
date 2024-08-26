@@ -1,76 +1,57 @@
 <template>
-  <div class="flex flex-col min-h-60 w-full">
-    <h1 class="mr-auto text-[36px] font-bold mb-3">
-      Корзина
-    </h1>
+  <div class="flex min-h-60 w-full flex-col">
+    <h1 class="mb-3 mr-auto text-[36px] font-bold">Корзина</h1>
 
     <ProgressSpinner v-if="pending" />
 
-    <div
-      v-else
-      class="flex flex-col justify-center items-start flex-wrap w-full gap-6"
-    >
-      <CartProduct
-        v-for="(product, index) in products"
-        :key="product.id"
-        :item="product"
-        :index="index"
-      />
+    <div v-else class="flex w-full flex-col flex-wrap items-start justify-center gap-6">
+      <CartProduct v-for="(product, index) in products" :key="product.id" :item="product" :index="index" />
 
-      <div v-if="!products.length">
-        У вас нет товаров в корзине
-      </div>
+      <div v-if="!products.length">У вас нет товаров в корзине</div>
 
-      <div
-        v-if="total"
-        class="text-lg font-bold"
-      >
-        Общая сумма покупки составит {{ total.toFixed(2) }} $
-      </div>
+      <div v-if="total" class="text-lg font-bold">Общая сумма покупки составит {{ total.toFixed(2) }} $</div>
     </div>
   </div>
 </template>
 
 <script>
-import { computed } from 'vue'
-import CartProduct from './components/CartProduct.vue'
-import { useCart } from '@/stores/cartProducts.js'
+import { computed } from 'vue';
+import CartProduct from './components/CartProduct.vue';
+import { useCart } from '@/stores/cartProducts.js';
 
 export default {
   setup() {
     // data
-    const cartStore = useCart()
+    const cartStore = useCart();
 
     // computed
     const total = computed(() => {
       let sum = 0;
 
       products.value.map((item) => {
-        sum = sum + (item.quantity * item.price);
-      })
+        sum = sum + item.quantity * item.price;
+      });
 
       return sum;
-    })
+    });
 
     const pending = computed(() => {
-      return cartStore.pending
-    })
+      return cartStore.pending;
+    });
 
     const products = computed(() => {
-      return cartStore.products
-    })
+      return cartStore.products;
+    });
 
     return {
       products,
       pending,
-      total,
-    }
+      total
+    };
   },
 
-  components: { CartProduct },
-}
+  components: { CartProduct }
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

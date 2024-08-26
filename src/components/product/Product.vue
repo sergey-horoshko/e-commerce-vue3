@@ -1,54 +1,45 @@
 <template>
   <router-link
     :to="`product/${item.id}`"
-    class="flex flex-col gap-3 overflow-hidden shadow-lg hover:shadow-cyan-500/50 duration-300 rounded-lg p-4">
-    <img
-      class="w-full max-h-80 min-h-80 object-cover mx-auto rounded-lg"
-      :src="item.image"
-      alt="Картинка товара"
-    >
+    class="flex flex-col gap-3 overflow-hidden rounded-lg p-4 shadow-lg duration-300 hover:shadow-cyan-500/50"
+  >
+    <img class="mx-auto max-h-80 min-h-80 w-full rounded-lg object-cover" :src="item.image" alt="Картинка товара" />
 
-    <span class="font-semibold text-xl truncate">
+    <span class="truncate text-xl font-semibold">
       {{ item.title }}
     </span>
 
-    <span class="font-semibold text-xl">
-      {{ item.price }} $
-    </span>
+    <span class="text-xl font-semibold"> {{ item.price }} $ </span>
 
-    <div class="flex justify-end items-center gap-3">
+    <div class="flex items-center justify-end gap-3">
       <vue-feather
         @click.prevent="changeValue(item)"
         :fill="item?.isFavorite ? 'white' : ''"
-        class="cursor-pointer "
+        class="cursor-pointer"
         type="heart"
       />
 
-      <vue-feather
-        @click.prevent="addProduct(item)"
-        class="cursor-pointer "
-        type="shopping-cart"
-      />
+      <vue-feather @click.prevent="addProduct(item)" class="cursor-pointer" type="shopping-cart" />
     </div>
   </router-link>
 </template>
 
 <script>
-import { useFavorites } from '@/stores/favoritesProducts.js'
-import { useCart } from '@/stores/cartProducts.js'
+import { useFavorites } from '@/stores/favoritesProducts.js';
+import { useCart } from '@/stores/cartProducts.js';
 
 export default {
   props: {
     item: {
       type: Object,
-      default: null,
+      default: null
     }
   },
 
   setup() {
     // data
-    const favoritesStore = useFavorites()
-    const cartStore = useCart()
+    const favoritesStore = useFavorites();
+    const cartStore = useCart();
 
     // methods
     const { toggleFavorite } = favoritesStore;
@@ -65,12 +56,10 @@ export default {
     return {
       changeValue,
       toggleFavorite,
-      addProduct,
-    }
+      addProduct
+    };
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

@@ -1,31 +1,36 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const BASE_API = import.meta.env.VITE_BASE_API
+const BASE_API = import.meta.env.VITE_BASE_API;
 
 const service = axios.create({
   baseURL: BASE_API
-})
+});
 
 /* Настройка всех запросов */
-service.interceptors.request.use(config => {
-  const conf = config
+service.interceptors.request.use(
+  (config) => {
+    const conf = config;
 
-  conf.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
+    conf.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
-  return conf
-}, (error) => {
-  Promise.reject(error)
-})
+    return conf;
+  },
+  (error) => {
+    Promise.reject(error);
+  }
+);
 
 /* Настройка всех ответов */
-service.interceptors.response.use((response) => {
-  const { data } = response
+service.interceptors.response.use(
+  (response) => {
+    const { data } = response;
 
-  return data
-}, (error) => {
+    return data;
+  },
+  (error) => {
+    /* 401, 403, 500 и т.д. */
+    Promise.reject(new Error(error));
+  }
+);
 
-  /* 401, 403, 500 и т.д. */
-  Promise.reject(new Error(error))
-})
-
-export default service
+export default service;

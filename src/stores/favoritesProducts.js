@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue';
-import { acceptHMRUpdate, defineStore } from 'pinia'
+import { acceptHMRUpdate, defineStore } from 'pinia';
 
 export const useFavorites = defineStore('favorites', () => {
   const pending = ref(true);
@@ -23,7 +23,7 @@ export const useFavorites = defineStore('favorites', () => {
   };
 
   const toggleFavorite = (item) => {
-    if (products.value.find(el => el.id === item.id)) {
+    if (products.value.find((el) => el.id === item.id)) {
       const index = products.value.indexOf(item);
 
       products.value.splice(index, 1);
@@ -36,9 +36,9 @@ export const useFavorites = defineStore('favorites', () => {
     localStorage.setItem('favorites', JSON.stringify(products.value));
   };
 
-  return { pending, products, counter, getData, toggleFavorite,  }
-})
+  return { pending, products, counter, getData, toggleFavorite };
+});
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useFavorites, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useFavorites, import.meta.hot));
 }

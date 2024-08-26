@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router';
 import home from './routes/home.js';
 import favorites from './routes/favorites.js';
 import cart from './routes/cart.js';
@@ -15,8 +15,8 @@ const router = createRouter({
       path: '/:catchAll(.*)',
       name: 'not-found',
       component: () => import('../views/notFound/NotFoundView.vue')
-    },
+    }
   ]
-})
+});
 
-export default router
+export default router;

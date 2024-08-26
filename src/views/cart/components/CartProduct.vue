@@ -1,69 +1,49 @@
 <template>
-  <router-link
-    :to="`product/${item.id}`"
-    class="flex gap-8 w-full">
-    <img
-      class="h-48 w-48"
-      :src="item.image"
-      alt="Картинка"
-    >
+  <router-link :to="`product/${item.id}`" class="flex w-full gap-8">
+    <img class="h-48 w-48" :src="item.image" alt="Картинка" />
 
     <div class="flex flex-col gap-4">
-      <span class="font-semibold text-xl">
+      <span class="text-xl font-semibold">
         {{ item.title }}
       </span>
 
-      <span class="font-bold text-lg">
-        {{ (item.price * item.quantity).toFixed(2) }} $
-      </span>
+      <span class="text-lg font-bold"> {{ (item.price * item.quantity).toFixed(2) }} $ </span>
 
       <div
-        class="flex justify-between items-center gap-5 bg-white rounded-lg max-w-40 text-[#252525] h-10 text-lg select-none	"
+        class="flex h-10 max-w-40 select-none items-center justify-between gap-5 rounded-lg bg-white text-lg text-[#252525]"
       >
-        <span
-          @click.prevent="removeQty(index)"
-          class="cursor-pointer p-3">
-          -
-        </span>
+        <span @click.prevent="removeQty(index)" class="cursor-pointer p-3"> - </span>
 
         <span>
           {{ item.quantity }}
         </span>
 
-        <span
-          @click.prevent="addQty(index)"
-          class="cursor-pointer p-3">
-          +
-        </span>
+        <span @click.prevent="addQty(index)" class="cursor-pointer p-3"> + </span>
       </div>
     </div>
 
-    <vue-feather
-      @click.prevent="removeProduct(item)"
-      class="cursor-pointer ml-auto"
-      type="x"
-    />
+    <vue-feather @click.prevent="removeProduct(item)" class="ml-auto cursor-pointer" type="x" />
   </router-link>
 </template>
 
 <script>
-import { useCart } from '@/stores/cartProducts.js'
+import { useCart } from '@/stores/cartProducts.js';
 
 export default {
   props: {
     item: {
       type: Object,
-      default: null,
+      default: null
     },
     index: {
       type: Number,
-      required: true,
+      required: true
     }
   },
 
   setup() {
     // data
-    const cartStore = useCart()
+    const cartStore = useCart();
 
     // methods
     const { addQty, removeQty, removeProduct } = cartStore;
@@ -72,11 +52,9 @@ export default {
       addQty,
       removeQty,
       removeProduct
-    }
+    };
   }
-}
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
